@@ -1,4 +1,5 @@
 from PIL import Image
+from time import strftime
 
 max_iteration = 1000
 x_center = -1.0
@@ -13,13 +14,19 @@ def make_grid(size):
 def mandelbrot(x, y):
     return (300 - x, 300 - y, 0)
 
+def generate_filename():
+    stamp = strftime("%Y-%m-%d-%H-%M-%S")
+    return "images/mandelbrot-{0}.png".format(stamp)
+
 im = Image.new("RGB", (size, size))
 
 for x, y in make_grid(size):
     red, green, blue = mandelbrot(x, y)
     im.putpixel( (x, y), (red, green, blue))
 
-im.save("mandelbrot.png", "PNG")
+filename = generate_filename()
+
+im.save(filename, "PNG")
 
 
 
