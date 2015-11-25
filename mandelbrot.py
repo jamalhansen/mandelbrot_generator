@@ -33,14 +33,15 @@ def mandelbrot(x, y):
         a, b = ((a**2) - (b**2) + x_re, (2 * a * b) + x_im)
         iteration += 1
 
-    if iteration < max_iteration:
-        return (0,0,0)
+    if iteration == max_iteration:
+        return (255,255,255)
     else:
         dist = euclidean(x,y)
+        color_val = (iteration * 10) % 255
 
-        r_val = iteration % dist
-        g_val = iteration % dist
-        b_val = iteration % dist
+        r_val = color_val
+        g_val = color_val
+        b_val = color_val
 
         return (r_val, g_val, b_val)
 
