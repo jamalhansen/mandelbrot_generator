@@ -39,9 +39,9 @@ def mandelbrot(x, y):
         dist = euclidean(x,y)
         color_val = (iteration * 10) % 255
 
-        r_val = color_val
-        g_val = color_val
-        b_val = color_val
+        r_val = (color_val * x * y) % 255
+        g_val = (color_val * x) % 255
+        b_val = (color_val * y) % 255
 
         return (r_val, g_val, b_val)
 
