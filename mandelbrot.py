@@ -1,14 +1,23 @@
+#! /usr/bin/env python3
+
+"""This script will generate a PNG image of the Mandelbrot set"""
+
 from PIL import Image
-from time import strftime
+import time
+import random
+import math
 
 max_iteration = 1000
-size = 300
+size = 500
 
 def make_grid(size):
     """Iterates over all the points in a grid"""
     for x in range(size):
         for y in range(size):
             yield x, y
+
+def euclidean(x, y):
+    return int(math.sqrt(x**2 + y**2))
 
 def mandelbrot(x, y):
     """Translates x y coordinates to an RGB value"""
@@ -25,18 +34,19 @@ def mandelbrot(x, y):
         iteration += 1
 
     if iteration < max_iteration:
-        r_val = iteration % 255
-        g_val = iteration % 255
-        b_val = iteration % 255
+        return (0,0,0)
+    else:
+        dist = euclidean(x,y)
+
+        r_val = iteration % dist
+        g_val = iteration % dist
+        b_val = iteration % dist
 
         return (r_val, g_val, b_val)
-    else:
-        return (0,0,0)
-
 
 def generate_filename():
     """Creates a filename with a timestamp"""
-    stamp = strftime("%Y-%m-%d-%H-%M-%S")
+    stamp = time.strftime("%Y-%m-%d-%H-%M-%S")
     return "images/mandelbrot-{0}.png".format(stamp)
 
 im = Image.new("RGB", (size, size))
@@ -48,7 +58,4 @@ for x, y in make_grid(size):
 filename = generate_filename()
 
 im.save(filename, "PNG")
-
-im.show()
-
 
