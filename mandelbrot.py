@@ -8,7 +8,7 @@ import random
 import math
 
 max_iteration = 1000
-size = 500
+size = 1000
 
 def make_grid(size):
     """Iterates over all the points in a grid"""
@@ -37,11 +37,11 @@ def mandelbrot(x, y):
         return (255,255,255)
     else:
         dist = euclidean(x,y)
-        color_val = (iteration * 10) % 255
+        color_val = iteration * size
 
-        r_val = (color_val * x * y) % 255
-        g_val = (color_val * x) % 255
-        b_val = (color_val * y) % 255
+        r_val = (color_val) % 255
+        g_val = (color_val + iteration) % 255
+        b_val = (color_val * iteration) % 255
 
         return (r_val, g_val, b_val)
 
