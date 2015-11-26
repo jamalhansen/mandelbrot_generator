@@ -8,7 +8,7 @@ import random
 import math
 
 max_iteration = 1000
-size = 1000
+size = 4000
 
 def make_grid(size):
     """Iterates over all the points in a grid"""
